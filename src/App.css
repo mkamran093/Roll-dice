@@ -32,6 +32,8 @@ main {
 p {
   text-align: center;
   width: 75%;
+  margin-top: 0;
+  text-align: center;
 }
 
 button {
