@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
+import Dice from "./components/Dice";
+import { nanoid } from "nanoid";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [numbers, setNumbers] = useState(allNewDice());
+
+  function heldDice(id) {
+    // const newArray = [];
+    // for (let i = 0; i < 10; i++) {
+    //   if (numbers[i].id === id) {
+    //     newArray.push({
+    //       ...numbers[i],
+    //       isHeld: !numbers[i].isHeld,
+    //     });
+    //   } else {
+    //     newArray.push(numbers[i]);
+    //   }
+    // }
+    // setNumbers(newArray);
+
+    setNumbers((oldNumbers) =>
+      oldNumbers.map((number) => {
+        return number.id === id
+          ? { ...number, isHeld: !number.isHeld }
+          : number;
+      })
+    );
+  }
+
+  function allNewDice() {
+    const newArray = [];
+    for (let i = 0; i < 10; i++) {
+      newArray.push({
+        value: Math.floor(Math.random() * 6) + 1,
+        isHeld: false,
+        id: nanoid(),
+      });
+    }
+    return newArray;
+  }
+
+  const diceElements = numbers.map((number) => (
+    <Dice
+      key={number.id}
+      value={number.value}
+      isHeld={number.isHeld}
+      heldDice={() => heldDice(number.id)}
+    />
+  ));
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main>
+      <div className="box">
+        <div className="content">
+          <h1>Tenzies</h1>
+          <p>
+            Roll until all dice are the same. Click each die to freeze it at its
+            current value between rolls.
+          </p>
+        </div>
+        <div className="dice_container">{diceElements}</div>
+        <button onClick={() => setNumbers(allNewDice())}>Roll</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </main>
+  );
 }
-
-export default App

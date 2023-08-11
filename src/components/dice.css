@@ -1,0 +1,15 @@
+.dice {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20.5889px;
+  text-align: center;
+  color: #2b283a;
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  padding-top: 15%;
+  cursor: pointer;
+  /* color: #2B283A; */
+}

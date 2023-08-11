@@ -6,4 +6,9 @@
 
 body {
   padding: 0;
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  color: #2b283a;
+  font-family: "Karla";
 }
