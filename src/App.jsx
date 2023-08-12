@@ -64,6 +64,11 @@ export default function App() {
     );
   }
 
+  function newGame() {
+    setNumbers(allNewDice());
+    setTenzies(false);
+  }
+
   const diceElements = numbers.map((number) => (
     <Dice
       key={number.id}
@@ -76,14 +81,16 @@ export default function App() {
   return (
     <main>
       <div className="box">
-        {tenzies && <Confetti />}
+        {tenzies && <Confetti width={"500px"} height={"500px"} />}
         <h1>Tenzies</h1>
         <p>
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.
         </p>
         <div className="dice_container">{diceElements}</div>
-        <button onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
+        <button onClick={tenzies ? newGame : rollDice}>
+          {tenzies ? "New Game" : "Roll"}
+        </button>
       </div>
     </main>
   );

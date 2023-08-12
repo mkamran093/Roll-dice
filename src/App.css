@@ -50,3 +50,8 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
+
+.canvas {
+  width: 500px;
+  height: 500px;
+}
